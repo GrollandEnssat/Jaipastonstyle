@@ -1,0 +1,428 @@
+
+<!--
+<ion-header class="nav-transparent">
+
+    <ion-navbar color="primary">
+      <ion-title>{{'menu.profile' | translate}}</ion-title>
+    </ion-navbar>
+
+</ion-header>-->
+
+
+
+
+
+<ion-content>
+
+  <div class="rlt">
+    <ion-slides pager>
+      <ion-slide *ngFor="let image of profile.images">
+        <img src="{{ image }}" >
+      </ion-slide>
+    </ion-slides>
+
+    <ion-grid class="action-btn">
+      <ion-row>
+        <ion-col text-center>
+          <button ion-button color="white" margin-right (click)="openEdit()">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHfSURBVGhD7Zk7Sx1RFEavWIiPQOxNwEa7EKtoRP+H6UQSLYyNpBTBXlDsJWWwzy+I2mhlLBNIMJVWmoCKoq6PuGFzObmoA5kt7AULZs7cM+yP8xg4t5EkSZI8kOe4gJ9xCzfwLXbio+EDnuF1wV84hqFpwzUsBfCeY9gwpRA/cRLHcRH9KB1guGlWCrGNT9HzCn2YKQxDKcQVvsQSGhn73Sc1RKDVmtC06sdmXqP95osa6qYU4htqNOy+FEZrxp5ra66VUogd1JrQvP9XmF78gfZM35naaBXCKIUZQn0Yre0Un2Et3CWE0RzGX8t5rIX7hDCaw5irWAsPCSH0/Dv6fnqP3vffqRJiF32/DFGFDIG+X4aoQoZA3y9DVCFDoO+XIaqQIdD3qy2EWEFfzAW+wFaEC9GNl+gLkn/wHZYIF0L4E4ySS+gJGULMoRWko5hpPHRt0kYmbAjxEa2oZTWADgD20dp/o9ZM2BBiD62wN2q4pQ+P0J5pA7BrGSpEF/qFPoieGfTFm6FCiGG04k6wHQdwAjXNNtEHkOFCiPdoBepw7NjdlwwZQqxjqeBmNf107hQyhPA7k6lF/RW1m2nERlEfzbD0oP7uUtEamVkcQW0Aj4oOfPL3MkmSJAyNxg1x2mXbXV7r+QAAAABJRU5ErkJggg==">
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
+  <div padding>
+    <h2>{{ profile.pseudo }}, {{ profile.age }}</h2>
+    <div>" {{profile.title}} "</div>
+    <div padding>
+  <ion-segment [(ngModel)]="content">
+    <ion-segment-button value="general">
+      {{"profile.general" | translate}}
+    </ion-segment-button>
+    <ion-segment-button value="values">
+      {{"profile.values" | translate}}
+    </ion-segment-button>
+    <ion-segment-button value="personality">
+      {{"profile.personality" | translate}}
+    </ion-segment-button>
+    <ion-segment-button value="style">
+      {{"profile.style" | translate}}
+    </ion-segment-button>
+  </ion-segment>
+</div>
+
+<div [ngSwitch]="content">
+  <ion-list *ngSwitchCase="'general'">
+    <ion-item>
+      <div padding-top class="profile">
+        <span class="bold">{{"profile.general" | translate}}</span>
+        <div *ngIf="profile.type.man">
+          <span class="label">{{"profile.type" | translate}}:</span>
+          {{ "profile.man" | translate}}
+        </div>
+        <div *ngIf="profile.type.woman">
+          <span class="label">{{"profile.type" | translate}}:</span>
+          {{ "profile.woman" | translate}}
+        </div>
+        <div *ngIf="profile.type.couple">
+          <span class="label">{{"profile.type" | translate}}:</span>
+          {{ "profile.couple" | translate}}
+        </div>
+        <div>
+          <span class="label">{{"profile.country" | translate}}:</span>
+          {{ profile.country }}
+        </div>
+        <div>
+          <span class="label">{{"profile.county" | translate}}:</span>
+          {{ profile.county }}
+        </div>
+        <div>
+          <span class="label">{{"profile.children" | translate}}:</span>
+          {{ profile.children }}
+        </div>
+        <div>
+          <span class="label">{{"profile.smoker" | translate}}:</span>
+          <span *ngIf="profile.smoker"> {{"profile.yes" | translate}} </span>
+          <span *ngIf="!profile.smoker"> {{"profile.no" | translate}} </span>
+        </div>
+        <div>
+          <span class="label">{{"profile.search" | translate}}:</span>
+          <span *ngIf="profile.search.man">{{"profile.man" | translate }}</span>
+          <span *ngIf="profile.search.woman">{{"profile.woman" | translate}} </span>
+          <span *ngIf="profile.search.couple">{{"profile.couple" | translate}}</span>
+        </div>
+        <div>
+          <span class="label">{{"profile.relationship" | translate}}:</span>
+          <span *ngIf="profile.relationship.love">{{"profile.love" | translate}} </span>
+          <span *ngIf="profile.relationship.friendly"> {{"profile.friendly" | translate}}</span>
+        </div>
+      </div>
+
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'values'">
+    <div *ngIf="profile.relationship.friendly">
+    <ion-item>
+      <span class="bold">{{"profile.friendlyValues" | translate}}</span>
+    </ion-item>
+
+
+    <ion-item>
+      <div class = "values_bold">{{"profile.mostImportantInFriendlyRelationship" | translate}}</div>
+      <div *ngIf="profile.valeurs_amicale.rire_complicite>profile.valeurs_amicale.entraide_ecoute
+        && profile.valeurs_amicale.rire_complicite>profile.valeurs_amicale.partager_loisirs">
+        <div class = "values">{{adapt(profile.valeurs_amicale.rire_complicite)}}% {{"profile.rire_complicite" | translate}}</div>
+        <div *ngIf="profile.valeurs_amicale.savoir_ecoute>profile.valeurs_amicale.partager_loisirs">
+          <div class = "values">{{adapt(profile.valeurs_amicale.entraide_ecoute)}}% {{"profile.entraide_ecoute" | translate}}</div>
+          <div class = "values">{{adapt(profile.valeurs_amicale.partager_loisirs)}}% {{"profile.partager_loisirs" | translate}}</div>
+      </div>
+      <div *ngIf="profile.valeurs_amicale.savoir_ecoute<=profile.valeurs_amicale.partager_loisirs">
+        <div class = "values">{{adapt(profile.valeurs_amicale.partager_loisirs)}}% {{"profile.partager_loisirs" | translate}}</div>
+        <div class = "values">{{adapt(profile.valeurs_amicale.entraide_ecoute)}}% {{"profile.entraide_ecoute" | translate}}</div>
+      </div>
+    </div>
+    <div *ngIf="profile.valeurs_amicale.entraide_ecoute>profile.valeurs_amicale.rire_complicite
+      && profile.valeurs_amicale.entraide_ecoute>profile.valeurs_amicale.partager_loisirs">
+      <div class = "values">{{adapt(profile.valeurs_amicale.entraide_ecoute)}}% {{"profile.entraide_ecoute" | translate}}</div>
+      <div *ngIf="profile.valeurs_amicale.rire_complicite>profile.valeurs_amicale.partager_loisirs">
+        <div class = "values">{{adapt(profile.valeurs_amicale.rire_complicite)}}% {{"profile.rire_complicite" | translate}}</div>
+        <div class = "values">{{adapt(profile.valeurs_amicale.partager_loisirs)}}% {{"profile.partager_loisirs" | translate}}</div>
+    </div>
+    <div *ngIf="profile.valeurs_amicale.rire_complicite<=profile.valeurs_amicale.partager_loisirs">
+      <div class = "values">{{adapt(profile.valeurs_amicale.partager_loisirs)}}% {{"profile.partager_loisirs" | translate}}</div>
+      <div class = "values">{{adapt(profile.valeurs_amicale.rire_complicite)}}% {{"profile.rire_complicite" | translate}}</div>
+    </div>
+  </div>
+  <div *ngIf="profile.valeurs_amicale.partager_loisirs>profile.valeurs_amicale.rire_complicite
+    && profile.valeurs_amicale.partager_loisirs>profile.valeurs_amicale.entraide_ecoute">
+    <div class = "values">{{adapt(profile.valeurs_amicale.partager_loisirs)}}% {{"profile.partager_loisirs" | translate}}</div>
+    <div *ngIf="profile.valeurs_amicale.conseils_quotidien>profile.valeurs_amicale.entraide_ecoute">
+      <div class = "values">{{adapt(profile.valeurs_amicale.rire_complicite)}}% {{"profile.rire_complicite" | translate}}</div>
+      <div class = "values">{{adapt(profile.valeurs_amicale.entraide_ecoute)}}% {{"profile.entraide_ecoute" | translate}}</div>
+  </div>
+  <div *ngIf="profile.valeurs_amicale.conseils_quotidien<=profile.valeurs_amicale.entraide_ecoute">
+    <div class = "values">{{adapt(profile.valeurs_amicale.entraide_ecoute)}}% {{"profile.entraide_ecoute" | translate}}</div>
+    <div class = "values">{{adapt(profile.valeurs_amicale.rire_complicite)}}% {{"profile.rire_complicite" | translate}}</div>
+  </div>
+  </div>
+    </ion-item>
+
+
+    <ion-item [ngStyle]="styleMostImportantInListeningAmicale()">
+      <div class = "values_bold">{{"profile.mostImportantInListening" | translate}}</div>
+      <div *ngIf="profile.valeurs_amicale.conseils_quotidien>profile.valeurs_amicale.savoir_ecoute
+        && profile.valeurs_amicale.conseils_quotidien>profile.valeurs_amicale.soutien">
+        <div class = "values">{{adapt(profile.valeurs_amicale.conseils_quotidien)}}% {{"profile.conseils_quotidien" | translate}}</div>
+        <div *ngIf="profile.valeurs_amicale.savoir_ecoute>profile.valeurs_amicale.soutien">
+          <div class = "values">{{adapt(profile.valeurs_amicale.savoir_ecoute)}}% {{"profile.savoir_ecoute" | translate}}</div>
+          <div class = "values">{{adapt(profile.valeurs_amicale.soutien)}}% {{"profile.soutien" | translate}}</div>
+      </div>
+      <div *ngIf="profile.valeurs_amicale.savoir_ecoute<=profile.valeurs_amicale.soutien">
+        <div class = "values">{{adapt(profile.valeurs_amicale.soutien)}}% {{"profile.soutien" | translate}}</div>
+        <div class = "values">{{adapt(profile.valeurs_amicale.savoir_ecoute)}}% {{"profile.savoir_ecoute" | translate}}</div>
+      </div>
+    </div>
+    <div *ngIf="profile.valeurs_amicale.savoir_ecoute>profile.valeurs_amicale.conseils_quotidien
+      && profile.valeurs_amicale.savoir_ecoute>profile.valeurs_amicale.soutien">
+      <div class = "values">{{adapt(profile.valeurs_amicale.savoir_ecoute)}}% {{"profile.savoir_ecoute" | translate}}</div>
+      <div *ngIf="profile.valeurs_amicale.conseils_quotidien>profile.valeurs_amicale.soutien">
+        <div class = "values">{{adapt(profile.valeurs_amicale.conseils_quotidien)}}% {{"profile.conseils_quotidien" | translate}}</div>
+        <div class = "values">{{adapt(profile.valeurs_amicale.soutien)}}% {{"profile.soutien" | translate}}</div>
+    </div>
+    <div *ngIf="profile.valeurs_amicale.conseils_quotidien<=profile.valeurs_amicale.soutien">
+      <div class = "values">{{adapt(profile.valeurs_amicale.soutien)}}% {{"profile.soutien" | translate}}</div>
+      <div class = "values">{{adapt(profile.valeurs_amicale.conseils_quotidien)}}% {{"profile.conseils_quotidien" | translate}}</div>
+    </div>
+  </div>
+  <div *ngIf="profile.valeurs_amicale.soutien>profile.valeurs_amicale.conseils_quotidien
+    && profile.valeurs_amicale.soutien>profile.valeurs_amicale.savoir_ecoute">
+    <div class = "values">{{adapt(profile.valeurs_amicale.soutien)}}% {{"profile.soutien" | translate}}</div>
+    <div *ngIf="profile.valeurs_amicale.conseils_quotidien>profile.valeurs_amicale.savoir_ecoute">
+      <div class = "values">{{adapt(profile.valeurs_amicale.conseils_quotidien)}}% {{"profile.conseils_quotidien" | translate}}</div>
+      <div class = "values">{{adapt(profile.valeurs_amicale.savoir_ecoute)}}% {{"profile.savoir_ecoute" | translate}}</div>
+  </div>
+  <div *ngIf="profile.valeurs_amicale.conseils_quotidien<=profile.valeurs_amicale.savoir_ecoute">
+    <div class = "values">{{adapt(profile.valeurs_amicale.savoir_ecoute)}}% {{"profile.savoir_ecoute" | translate}}</div>
+    <div class = "values">{{adapt(profile.valeurs_amicale.conseils_quotidien)}}% {{"profile.conseils_quotidien" | translate}}</div>
+  </div>
+  </div>
+    </ion-item>
+
+  </div>
+
+  <div *ngIf="profile.relationship.love">
+
+    <ion-item>
+      <span class="bold">{{"profile.loveValues" | translate}}</span>
+    </ion-item>
+    <ion-item>
+      <div class = "values_bold">{{"profile.mostImportantInLoveRelationship" | translate}}</div>
+      <div *ngIf="profile.valeurs_amoureuses.rire_complicite>profile.valeurs_amoureuses.entraide_ecoute
+        && profile.valeurs_amoureuses.rire_complicite>profile.valeurs_amoureuses.sexualite_epanouie">
+        <div class = "values">{{adapt(profile.valeurs_amoureuses.rire_complicite)}}% {{"profile.rire_complicite" | translate}}</div>
+        <div *ngIf="profile.valeurs_amoureuses.savoir_ecoute>profile.valeurs_amoureuses.sexualite_epanouie">
+          <div class = "values">{{adapt(profile.valeurs_amoureuses.entraide_ecoute)}}% {{"profile.entraide_ecoute" | translate}}</div>
+          <div class = "values">{{adapt(profile.valeurs_amoureuses.sexualite_epanouie)}}% {{"profile.sexualite_epanouie" | translate}}</div>
+      </div>
+      <div *ngIf="profile.valeurs_amoureuses.savoir_ecoute<=profile.valeurs_amoureuses.sexualite_epanouie">
+        <div class = "values">{{adapt(profile.valeurs_amoureuses.sexualite_epanouie)}}% {{"profile.sexualite_epanouie" | translate}}</div>
+        <div class = "values">{{adapt(profile.valeurs_amoureuses.entraide_ecoute)}}% {{"profile.entraide_ecoute" | translate}}</div>
+      </div>
+    </div>
+    <div *ngIf="profile.valeurs_amoureuses.entraide_ecoute>profile.valeurs_amoureuses.rire_complicite
+      && profile.valeurs_amoureuses.entraide_ecoute>profile.valeurs_amoureuses.sexualite_epanouie">
+      <div class = "values">{{adapt(profile.valeurs_amoureuses.entraide_ecoute)}}% {{"profile.entraide_ecoute" | translate}}</div>
+      <div *ngIf="profile.valeurs_amoureuses.rire_complicite>profile.valeurs_amoureuses.sexualite_epanouie">
+        <div class = "values">{{adapt(profile.valeurs_amoureuses.rire_complicite)}}% {{"profile.rire_complicite" | translate}}</div>
+        <div class = "values">{{adapt(profile.valeurs_amoureuses.sexualite_epanouie)}}% {{"profile.sexualite_epanouie" | translate}}</div>
+    </div>
+    <div *ngIf="profile.valeurs_amoureuses.rire_complicite<=profile.valeurs_amoureuses.sexualite_epanouie">
+      <div class = "values">{{adapt(profile.valeurs_amoureuses.sexualite_epanouie)}}% {{"profile.sexualite_epanouie" | translate}}</div>
+      <div class = "values">{{adapt(profile.valeurs_amoureuses.rire_complicite)}}% {{"profile.rire_complicite" | translate}}</div>
+    </div>
+  </div>
+  <div *ngIf="profile.valeurs_amoureuses.sexualite_epanouie>profile.valeurs_amoureuses.rire_complicite
+    && profile.valeurs_amoureuses.sexualite_epanouie>profile.valeurs_amoureuses.entraide_ecoute">
+    <div class = "values">{{adapt(profile.valeurs_amoureuses.sexualite_epanouie)}}% {{"profile.sexualite_epanouie" | translate}}</div>
+    <div *ngIf="profile.valeurs_amoureuses.conseils_quotidien>profile.valeurs_amoureuses.entraide_ecoute">
+      <div class = "values">{{adapt(profile.valeurs_amoureuses.rire_complicite)}}% {{"profile.rire_complicite" | translate}}</div>
+      <div class = "values">{{adapt(profile.valeurs_amoureuses.entraide_ecoute)}}% {{"profile.entraide_ecoute" | translate}}</div>
+  </div>
+  <div *ngIf="profile.valeurs_amoureuses.conseils_quotidien<=profile.valeurs_amoureuses.entraide_ecoute">
+    <div class = "values">{{adapt(profile.valeurs_amoureuses.entraide_ecoute)}}% {{"profile.entraide_ecoute" | translate}}</div>
+    <div class = "values">{{adapt(profile.valeurs_amoureuses.rire_complicite)}}% {{"profile.rire_complicite" | translate}}</div>
+  </div>
+  </div>
+    </ion-item>
+
+
+    <ion-item [ngStyle]="styleMostImportantInListeningAmour()">
+      <div class = "values_bold">{{"profile.mostImportantInListening" | translate}}</div>
+      <div *ngIf="profile.valeurs_amoureuses.conseils_quotidien>profile.valeurs_amoureuses.savoir_ecoute
+        && profile.valeurs_amoureuses.conseils_quotidien>profile.valeurs_amoureuses.soutien">
+        <div class = "values">{{adapt(profile.valeurs_amoureuses.conseils_quotidien)}}% {{"profile.conseils_quotidien" | translate}}</div>
+        <div *ngIf="profile.valeurs_amoureuses.savoir_ecoute>profile.valeurs_amoureuses.soutien">
+          <div class = "values">{{adapt(profile.valeurs_amoureuses.savoir_ecoute)}}% {{"profile.savoir_ecoute" | translate}}</div>
+          <div class = "values">{{adapt(profile.valeurs_amoureuses.soutien)}}% {{"profile.soutien" | translate}}</div>
+      </div>
+      <div *ngIf="profile.valeurs_amoureuses.savoir_ecoute<=profile.valeurs_amoureuses.soutien">
+        <div class = "values">{{adapt(profile.valeurs_amoureuses.soutien)}}% {{"profile.soutien" | translate}}</div>
+        <div class = "values">{{adapt(profile.valeurs_amoureuses.savoir_ecoute)}}% {{"profile.savoir_ecoute" | translate}}</div>
+      </div>
+    </div>
+    <div *ngIf="profile.valeurs_amoureuses.savoir_ecoute>profile.valeurs_amoureuses.conseils_quotidien
+      && profile.valeurs_amoureuses.savoir_ecoute>profile.valeurs_amoureuses.soutien">
+      <div class = "values">{{adapt(profile.valeurs_amoureuses.savoir_ecoute)}}% {{"profile.savoir_ecoute" | translate}}</div>
+      <div *ngIf="profile.valeurs_amoureuses.conseils_quotidien>profile.valeurs_amoureuses.soutien">
+        <div class = "values">{{adapt(profile.valeurs_amoureuses.conseils_quotidien)}}% {{"profile.conseils_quotidien" | translate}}</div>
+        <div class = "values">{{adapt(profile.valeurs_amoureuses.soutien)}}% {{"profile.soutien" | translate}}</div>
+    </div>
+    <div *ngIf="profile.valeurs_amoureuses.conseils_quotidien<=profile.valeurs_amoureuses.soutien">
+      <div class = "values">{{adapt(profile.valeurs_amoureuses.soutien)}}% {{"profile.soutien" | translate}}</div>
+      <div class = "values">{{adapt(profile.valeurs_amoureuses.conseils_quotidien)}}% {{"profile.conseils_quotidien" | translate}}</div>
+    </div>
+  </div>
+  <div *ngIf="profile.valeurs_amoureuses.soutien>profile.valeurs_amoureuses.conseils_quotidien
+    && profile.valeurs_amoureuses.soutien>profile.valeurs_amoureuses.savoir_ecoute">
+    <div class = "values">{{adapt(profile.valeurs_amoureuses.soutien)}}% {{"profile.soutien" | translate}}</div>
+    <div *ngIf="profile.valeurs_amoureuses.conseils_quotidien>profile.valeurs_amoureuses.savoir_ecoute">
+      <div class = "values">{{adapt(profile.valeurs_amoureuses.conseils_quotidien)}}% {{"profile.conseils_quotidien" | translate}}</div>
+      <div class = "values">{{adapt(profile.valeurs_amoureuses.savoir_ecoute)}}% {{"profile.savoir_ecoute" | translate}}</div>
+  </div>
+  <div *ngIf="profile.valeurs_amoureuses.conseils_quotidien<=profile.valeurs_amoureuses.savoir_ecoute">
+    <div class = "values">{{adapt(profile.valeurs_amoureuses.savoir_ecoute)}}% {{"profile.savoir_ecoute" | translate}}</div>
+    <div class = "values">{{adapt(profile.valeurs_amoureuses.conseils_quotidien)}}% {{"profile.conseils_quotidien" | translate}}</div>
+  </div>
+  </div>
+    </ion-item>
+
+
+    <ion-item [ngStyle]="styleAdmiration()">
+      <div class = "values_bold">{{"profile.admiration" | translate}}</div>
+      <div *ngIf="profile.valeurs_amoureuses.admiration>50">
+        <div class = "values">{{profile.valeurs_amoureuses.admiration}}% {{"profile.respect" | translate}}</div>
+        <div class = "values">{{100-profile.valeurs_amoureuses.admiration}}% {{"profile.eblouissement" | translate}}</div>
+      </div>
+      <div *ngIf="profile.valeurs_amoureuses.admiration<=50">
+        <div class = "values">{{100-profile.valeurs_amoureuses.admiration}}% {{"profile.eblouissement" | translate}}</div>
+        <div class = "values">{{profile.valeurs_amoureuses.admiration}}% {{"profile.respect" | translate}}</div>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class = "values_bold">{{"profile.projets" | translate}}</div>
+      <div> \n </div>
+      <div class = "values_flower"> - {{"profile.important" | translate}}</div>
+      <img src={{flowerImage1(profile.valeurs_amoureuses.projets)}} width="30">
+      <div class="values_small">{{flowerText1(profile.valeurs_amoureuses.projets)}}</div>
+      <div class = "values_flower"> - {{"profile.decisions_communes" | translate}}</div>
+      <img src={{flowerImage1(profile.valeurs_amoureuses.decisions_communes)}} width="30">
+      <div class = "values_small">{{flowerText1(profile.valeurs_amoureuses.decisions_communes)}}</div>
+    </ion-item>
+
+    <ion-item>
+      <div class = "values_bold"> {{"profile.fidelite" | translate}} {{fidelite()}}</div>
+    </ion-item>
+    <ion-item>
+      <div class = "values_bold">{{"profile.conflit" | translate}}</div>
+      <div *ngIf="profile.valeurs_amoureuses.conflit.simple_desaccord" class = "values">
+        - {{"profile.simple_desaccord" | translate}}</div>
+      <div *ngIf="profile.valeurs_amoureuses.conflit.desaccord_tension" class = "values">
+        - {{"profile.desaccord_tension" | translate}}</div>
+      <div *ngIf="profile.valeurs_amoureuses.conflit.desaccord_agressif" class = "values">
+        - {{"profile.desaccord_agressif" | translate}}</div>
+    </ion-item>
+    <ion-item>
+      <div class = "values_bold">{{"profile.conflit_utilite" | translate}}</div>
+      <div *ngIf="profile.valeurs_amoureuses.conflit_utilite.reconciliation" class = "values">
+        - {{"profile.reconciliation" | translate}}</div>
+      <div *ngIf="profile.valeurs_amoureuses.conflit_utilite.avancer" class = "values">
+        - {{"profile.avancer" | translate}}</div>
+      <div *ngIf="profile.valeurs_amoureuses.conflit_utilite.rien" class = "values">
+        - {{"profile.rien" | translate}}</div>
+    </ion-item>
+    <ion-item>
+      <div class = "values_bold">{{"profile.resoudre_conflit" | translate}}</div>
+      <div *ngIf="profile.valeurs_amoureuses.resoudre_conflit.calme" class = "values">
+        - {{"profile.calme" | translate}}</div>
+      <div *ngIf="profile.valeurs_amoureuses.resoudre_conflit.concession" class = "values">
+        - {{"profile.concession" | translate}}</div>
+      <div *ngIf="profile.valeurs_amoureuses.resoudre_conflit.pas_eviter" class = "values">
+        - {{"profile.pas_eviter" | translate}}</div>
+        <div *ngIf="profile.valeurs_amoureuses.resoudre_conflit.eviter" class = "values">
+        - {{"profile.eviter" | translate}}</div>
+    </ion-item>
+    </div>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'personality'">
+    <ion-item>
+      <div padding-top class="profile">
+        <span class="bold">{{"profile.personality" | translate}}</span>
+        <div>
+          <span class="label">{{"profile.qualities" | translate}} :</span>
+          {{ profile.personnalite.qualite[0] }}, {{ profile.personnalite.qualite[1] }}
+        </div>
+        <div *ngIf="profile.personnalite.attitude > 50">
+          <span class="label">{{"profile.attitude" | translate}} :</span>
+            {{"profile.extrovert" | translate}} à {{profile.personnalite.attitude}}%
+        </div>
+        <div *ngIf="profile.personnalite.attitude <= 50">
+          <span class="label">{{"profile.attitude" | translate}} :</span>
+            {{"profile.introverted" | translate}} à {{100-profile.personnalite.attitude}}%
+        </div>
+        <div *ngIf="profile.personnalite.perception > 50">
+          <span class="label">{{"profile.perception" | translate}} :</span>
+            {{"profile.pratico" | translate}} à {{profile.personnalite.perception}}%
+        </div>
+        <div *ngIf="profile.personnalite.perception <= 50">
+          <span class="label">{{"profile.perception" | translate}} :</span>
+            {{"profile.intuitive" | translate}} à {{100-profile.personnalite.perception}}%
+        </div>
+        <div *ngIf="profile.personnalite.jugement > 50">
+          <span class="label">{{"profile.jugement" | translate}} :</span>
+            {{"profile.thoughtful" | translate}} à {{profile.personnalite.jugement}}%
+        </div>
+        <div *ngIf="profile.personnalite.jugement <= 50">
+          <span class="label">{{"profile.jugement" | translate}} :</span>
+            {{"profile.sensitive" | translate}} à {{100-profile.personnalite.jugement}}%
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'style'">
+    <ion-item>
+      <div padding-top class="style">
+        <span class="bold">{{"profile.physical_appearance" | translate}}</span>
+        <div>
+          <span class="label">{{"profile.height" | translate}}:</span>
+          {{profile.style.height}}cm
+        </div>
+        <div>
+          <span class="label">{{"profile.weight" | translate}}:</span>
+          {{profile.style.weight}}kg
+        </div>
+        <div>
+          <span class="label">{{"profile.figure" | translate}}:</span>
+          {{"profile." + profile.style.figure | translate}}
+        </div>
+        <div>
+          <span class="label">{{"profile.origin" | translate}}:</span>
+          {{"profile." + profile.style.origin | translate}}
+        </div>
+        <div>
+          <span class="label">{{"profile.hair_color" | translate}}:</span>
+          {{profile.style.hair_color}}
+        </div>
+        <div>
+          <span class="label">{{"profile.hair_length" | translate}}:</span>
+          {{profile.style.hair_length}}
+        </div>
+        <div>
+          <span class="label">{{"profile.eye_color" | translate}}:</span>
+          {{profile.style.eye_color}}
+        </div>
+        <div>
+          <span class="label">{{"profile.musical_taste" | translate}}:</span>
+          {{"profile." + profile.style.musical_taste[0] | translate}}, {{"profile." + profile.style.musical_taste[1] | translate}}
+        </div>
+      </div>
+    </ion-item>
+    <ion-item-divider class="whiteBackground">{{"profile.fashion_style" | translate}}</ion-item-divider>
+    <ion-item [ngStyle]="styleFashion()">
+      <!--
+      <div item-start class="largeItem"><br /><br /><br />{{"profile." + profile.style.fashion_style[0] | translate}}</div>
+      <div item-end class="largeItem"><br /><br /><br />{{"profile." + profile.style.fashion_style[1] | translate}}</div>-->
+    </ion-item>
+    <ion-item>
+
+    </ion-item>
+
+  </ion-list>
+</div>
+  </div>
+
+</ion-content>

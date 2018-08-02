@@ -1,0 +1,94 @@
+page-profile {
+
+  .scroll-content {
+    margin-top: 0 !important;
+
+    ion-slides {
+      height: auto;
+
+      .swiper-pagination {
+        top: 10px;
+
+        .swiper-pagination-bullet {
+          background: color($colors, white);
+        }
+      }
+    }
+
+    .action-btn {
+      position: absolute;
+      width: 100%;
+      bottom: 16px;
+      z-index: 100;
+
+      button {
+        border-radius: 50%;
+        width: 2.8em;
+        height: 2.8em;
+        font-size: 1.6em;
+      }
+    }
+  }
+  .profile {
+
+    &>div {
+      margin-top: 5px;
+
+      .label {
+        display: inline-block;
+        width: 40%;
+        color: color($colors, dark);
+      }
+    }
+  }
+
+  .style {
+    font-size: 90%;
+
+    &>div {
+      margin-top: 5px;
+      .label {
+        display: inline-block;
+        width: 60%;
+        color: color($colors, dark);
+      }
+    }
+  }
+  .values {
+    font-size: 85%;
+  }
+  .values_bold {
+    font-size: 80%;
+    font-weight: bold;
+  }
+
+  .values_small {
+    font-size: 65%;
+    line-height: 60%;
+    margin-bottom: 2px;
+  }
+  .values_flower{
+    font-size: 80%;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+
+  .largeItem{
+    margin-top: 400%;
+  }
+
+  .whiteBackground{
+    font-size: 110%;
+    font-weight: bold;
+    background-color: rgba(255,255,255,1);
+  }
+  /*
+  .test {
+    background-image: url('../../assets/img/Values/sexualite_epanouie.png');
+    background-repeat: no-reapeat;
+    background-size: 100%;
+    background-position: center;
+    filter: opacity(50%);
+  }*/
+
+}
